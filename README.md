@@ -8,15 +8,17 @@ This is a project template for [Svelte](https://svelte.dev) apps. It lives at ht
 
 To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
 
-If there is no NPX you can install it for Linux users
+If there is no NPX you can install it for Linux users:
 
 ```bash
 sudo npm i -g npx
 ```
-while Windows users
+while Windows users:
 ```bash
 npm i -g npx
 ```
+
+if so then do the installation to svelte:
 
 ```bash
 npx degit sveltejs/template svelte-app
