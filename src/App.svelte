@@ -3,18 +3,20 @@
 </svelte:head>
 
 <script>
-  // Import Components Navigasi
+    // Import Components Navigasi
 	import  { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'sveltestrap';
-  // Import Components Jumbroton
-  import { Button, Jumbotron } from 'sveltestrap';
+    // Import Components Jumbroton
+    import { Button, Jumbotron } from 'sveltestrap';
 
+    // Menu Handling ketika Menu di Kecilkan
 	let isOpen = false;
 
 	function handleUpdate(event) {
     	isOpen = event.detail.isOpen;
 	}
 </script>
-
+    
+<!-- Kode untuk Menu Navigasi Blog -->
 <Navbar color="dark" dark expand="md">
   	<NavbarBrand href="/">Blog</NavbarBrand>
   	<NavbarToggler on:click={() => (isOpen = !isOpen)} />
@@ -32,6 +34,8 @@
     	</Nav>
   	</Collapse>
 </Navbar>
+
+<!-- Kode untuk Content awal Blog -->
 <Jumbotron>
     <h5 class="display-3">Selamat Datang!</h5>
     <p class="lead">
