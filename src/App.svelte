@@ -8,12 +8,25 @@
     // Import Components Jumbroton
     import { Button, Jumbotron } from 'sveltestrap';
 
+    // Import Card 
+    import {
+        Container, Card, CardBody, CardFooter, CardHeader,CardImg, CardSubtitle, CardText, CardTitle
+    } from 'sveltestrap';
+
     // Menu Handling ketika Menu di Kecilkan
 	let isOpen = false;
 
 	function handleUpdate(event) {
     	isOpen = event.detail.isOpen;
 	}
+
+    // Integrasi API Konten Tunggal
+    let items;
+    $: fetch( `https://training.awpramono.web.id/blog/content/summary/latest/`+"?fresh="+(""+Math.floor(Math.random() * 1000000)))
+        .then(r => r.json()) 
+        .then(data => {
+        items = data;
+    });
 </script>
     
 <!-- Kode untuk Menu Navigasi Blog -->
@@ -47,6 +60,31 @@
       to space content out within the larger container.
     </p>
     <p class="lead">
-        <Button color="primary">Selengkapnya</Button>
+        <Button color="primary">Detail</Button>
     </p>
 </Jumbotron>
+
+<!-- Content awal Blog yang terintegrasi dengan API -->
+{#if items}
+<Jumbotron>
+  <h1 class="display-4" style="cursor: pointer;">{items[0].title}</h1>
+  <p class="lead">
+    {items[0].description}
+  </p>
+  <Button>Selengkapnya</Button>
+</Jumbotron>
+{/if}
+
+<!-- Content Card -->
+<Container>
+<Card body class="mb-3">
+  <CardHeader>
+    <CardTitle><h3 class="display-7">Judul Artikel</h3>
+    </CardTitle>
+  </CardHeader>
+  <CardBody><CardText>
+    <p>Isi Artikel ... </p> 
+    </CardText>
+  </CardBody>
+</Card>
+</Container>
