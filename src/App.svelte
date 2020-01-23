@@ -27,6 +27,14 @@
         .then(data => {
         items = data;
     });
+
+    let articles;
+    $: fetch( `https://training.awpramono.web.id/blog/content/summary/list/`+"?fresh="+(""+ Math.floor(Math.random() * 1000000)))
+        .then(r => r.json()) 
+        .then(data => {
+          articles = data;
+    });
+
 </script>
     
 <!-- Kode untuk Menu Navigasi Blog -->
@@ -66,25 +74,42 @@
 
 <!-- Content awal Blog yang terintegrasi dengan API -->
 {#if items}
-<Jumbotron>
-  <h1 class="display-4" style="cursor: pointer;">{items[0].title}</h1>
-  <p class="lead">
-    {items[0].description}
-  </p>
-  <Button>Selengkapnya</Button>
-</Jumbotron>
+    <Jumbotron>
+        <h1 class="display-4" style="cursor: pointer;">{items[0].title}</h1>
+        <p class="lead">
+            {items[0].description}
+        </p>
+        <Button>Selengkapnya</Button>
+    </Jumbotron>
 {/if}
 
 <!-- Content Card -->
 <Container>
-<Card body class="mb-3">
-  <CardHeader>
-    <CardTitle><h3 class="display-7">Judul Artikel</h3>
-    </CardTitle>
-  </CardHeader>
-  <CardBody><CardText>
-    <p>Isi Artikel ... </p> 
-    </CardText>
-  </CardBody>
-</Card>
+    <Card body class="mb-3">
+        <CardHeader>
+            <CardTitle><h3 class="display-7">Judul Artikel</h3>
+            </CardTitle>
+        </CardHeader>
+        <CardBody><CardText>
+            <p>Isi Artikel ... </p> 
+            </CardText>
+        </CardBody>
+    </Card>
+</Container>
+
+<Container>
+{#if articles}
+    {#each articles as item }
+        <Card body class="mb-3">
+            <CardHeader>
+                <CardTitle><h3 class="display-7">{item.title}</h3>
+                </CardTitle>
+            </CardHeader>
+            <CardBody><CardText>
+                <p>{item.description} </p> 
+                </CardText>
+            </CardBody>
+        </Card>
+    {/each}
+{/if}
 </Container>
